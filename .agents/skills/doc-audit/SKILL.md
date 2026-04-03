@@ -3,7 +3,7 @@ name: doc-audit
 description: AI 에이전트용 지시 문서(룰, 스킬, 에이전트)를 검증하고, 기계적으로 따를 수 있는 고수준 규칙서로 생성·교정하는 관제 스킬.
 ---
 
-# Skill: Themis (Document Verification & Generation)
+# Skill: Document Verification & Generation
 
 ## 📌 목표 (Core Objective)
 AI 에이전트용 지시 문서(룰, 스킬, 에이전트)를 유형별 구조 기준 + 6대 작성 품질 기준으로 검증하고, 교정하여 고수준 규칙서를 생성한다.

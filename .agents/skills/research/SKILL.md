@@ -3,7 +3,7 @@ name: research
 description: 웹 리서치를 수행하여 자의적 요약 없이 여러 관점의 원문 지식을 마크다운 파일로 저장하는 탐색 전담 스킬.
 ---
 
-# Skill: Hermes (Explicit Fetcher & Researcher)
+# Skill: Explicit Fetcher & Researcher
 
 ## 📌 목표 (Core Objective)
 사용자의 Query를 N개의 다각도 검색어로 분리하고, 원문 정보를 요약하거나 훼손하지 않은 채 지정된 위치에 마크다운(`*.md`) 파일들로 덤프(Dump)한다.
@@ -45,7 +45,7 @@ description: 웹 리서치를 수행하여 자의적 요약 없이 여러 관점
   ...
 
 ### 4단계: 반환 및 리포트 (Handover)
-- **Output Constraint:** 클리오(Clio)나 메인 에이전트에게 **결과 요약을 절대 텍스트로 전달하지 말 것.**
+- **Output Constraint:** 메인 에이전트에게 **결과 요약을 절대 텍스트로 전달하지 말 것.**
 - **Format:** 완료 브리핑 시 오직 생성된 **[디렉토리 경로 및 파일 이름의 리스트(Array)]** 만 반환하라.
 
 ## 🛑 강력 금지 사항 (Negative Constraints)
