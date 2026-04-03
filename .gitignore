@@ -1,0 +1,23 @@
+# AI Agent Tools
+.serena/
+.aider*
+.codex/
+.continue/
+.copilot/
+.roo/
+.windsurf/
+.codeium/
+
+# Workspace
+workspace/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.idea/
+.vscode/settings.json
