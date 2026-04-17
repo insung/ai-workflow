@@ -1,54 +1,73 @@
 # AI Workflow
+> AI 에이전트 파이프라인을 통한 지식 리서치, 구조화 및 트랙 기반 작업 관리 도구
 
-AI 에이전트를 활용한 범용 작업 워크플로우 도구 모음입니다. 리서치부터 분류, 룰 생성 및 감사, 그리고 트랙 기반의 작업 관리까지 일관된 파이프라인을 제공합니다.
+이 프로젝트는 리서치부터 분류, 룰 생성 및 감사, 그리고 체계적인 작업 관리까지 아우르는 AI 에이전트 기반의 범용 워크플로우 엔진입니다. `track-agent`를 중심으로 복잡한 엔지니어링 작업을 안정적인 생명주기 내에서 수행합니다.
+
+## 🔄 파이프라인 (Pipeline Flow)
+
+```mermaid
+graph LR
+    A[researcher] -->|원문 데이터| B[doc-indexer]
+    B -->|구조화된 인덱스| C[doc-auditor]
+    C -->|실행 가능한 룰| D[track-agent]
+    D -->|작업 관리| E[Outcome]
+```
+
+1.  **리서치 (Research):** `researcher`가 방대한 웹 데이터를 수집하고 보존합니다.
+2.  **구조화 (Indexing):** `doc-indexer`가 수집된 지식을 카테고리화하고 중앙 인덱스를 생성합니다.
+3.  **지침 생성 (Auditing):** `doc-auditor`가 구조화된 데이터를 분석하여 기계적인 코딩 룰과 지침을 도출합니다.
+4.  **트랙 관리 (Track Mgmt):** `track-agent`가 생성된 지침에 따라 실제 작업을 7단계 워크플로우에 맞춰 집요하게 수행합니다.
 
 ## 🤖 프로젝트 에이전트 (Agents)
 
-이 프로젝트는 특정 도메인의 지식을 수집하고 구조화하는 데 최적화된 에이전트들을 포함하고 있습니다.
-
-| 에이전트 | 핵심 역할 | 파일 경로 |
+| 에이전트 | 핵심 역할 | 제공 스킬 |
 | :--- | :--- | :--- |
-| **track-agent** | 7단계 생명주기 기반의 작업 트랙 생성·관리·완료 | `.gemini/agents/track-agent.md` |
-| **researcher** | 특정 주제에 대한 웹 검색 및 원문 데이터 수집 | `.gemini/agents/researcher.md` |
-| **doc-indexer** | 마크다운 문서 메타데이터 주입 및 `INDEX.md` 생성 | `.gemini/agents/doc-indexer.md` |
-| **doc-auditor** | 지시 문서(룰/스킬)의 품질 검증 및 리포트 생성 | `.gemini/agents/doc-auditor.md` |
-| **doc-reconciler** | 문서 간 데이터 충돌 탐지 및 해결 방안 제안 | `.gemini/agents/doc-reconciler.md` |
+| **track-agent** | 7단계 TDD 워크플로우 기반 작업 관리 | `tracks-templates` |
+| **researcher** | 다각도 웹 검색 및 원문 무손실 수집 | `research` |
+| **doc-indexer** | 문서 자동 분류 및 INDEX.md 유지 관리 | `doc-index` |
+| **doc-auditor** | 지시 문서 품질 검증 및 룰셋 도출 | `doc-audit` |
+| **doc-reconciler** | 문서 간 데이터 충돌 탐지 및 해결 | `doc-reconcile` |
 
-## 🛠️ 전문 스킬 (Skills)
+## 🛠️ 전문 스킬 (Core Skills)
 
-에이전트들이 복잡한 작업을 수행하기 위해 호출하는 전문 기능 모듈입니다.
-
-| 스킬 | 주요 기능 | 파일 경로 |
-| :--- | :--- | :--- |
-| **research** | 자의적 요약 없이 여러 관점의 원문 지식을 보존하며 리서치 수행 | `.gemini/skills/research/` |
-| **doc-index** | 문서 카테고리화 및 단일 테이블 형태의 인덱스 유지 관리 | `.gemini/skills/doc-index/` |
-| **doc-audit** | AI 에이전트용 지시 문서를 기계적 로직으로 교정 및 관제 | `.gemini/skills/doc-audit/` |
-| **doc-reconcile** | frontmatter 기반의 문서 충돌 분류 및 조치 리포트 생성 | `.gemini/skills/doc-reconcile/` |
-| **readme-craft** | 프로젝트 유형에 최적화된 고품질 `README.md` 생성 | `.gemini/skills/readme-craft/` |
-
-## 🔄 파이프라인 (Pipelines)
-
-```text
-researcher → doc-indexer → doc-auditor
-(정보 수집)   (분류/구조화)  (룰/지침 생성)
-```
-
-1. **리서치:** `researcher`를 통해 특정 주제에 대한 방대한 데이터를 수집합니다.
-2. **구조화:** `doc-indexer`가 수집된 문서를 분류하고 전체 인덱스를 생성합니다.
-3. **룰 생성:** `doc-auditor`가 구조화된 데이터를 기반으로 즉시 실행 가능한 코딩 룰이나 가이드를 도출합니다.
+*   **`research`**: 자의적 요약 없이 여러 관점의 원문 지식을 보존하며 리서치 수행
+*   **`doc-index`**: frontmatter 기반의 문서 카테고리화 및 단일 테이블 인덱스 관리
+*   **`doc-audit`**: AI 에이전트용 지시 문서를 기계적 로직으로 교정 및 관제
+*   **`readme-craft`**: 프로젝트 유형에 최적화된 고품질 README.md 생성 및 유지
 
 ## 📂 디렉토리 구조
 
 ```text
 .gemini/
-├── agents/             # 메인 에이전트 정의
-├── skills/             # 전문 스킬 모듈
+├── agents/             # 에이전트 페르소나 정의 (.md)
+├── skills/             # 에이전트가 호출하는 전문 스킬 모듈
 ├── tracks-templates/   # track-agent용 워크플로우 템플릿
 └── workflows/          # 고수준 작업 파이프라인 정의
+docs/
+└── TRACK_AGENT_GUIDE.md # 신규 track-agent 상세 운영 가이드
 ```
 
-## 🚀 사용 방법
+## 🚀 빠른 시작 (Quick Start)
 
-1. Gemini CLI 또는 호환되는 AI 에이전트 도구를 실행합니다.
-2. 에이전트는 `.gemini/` 디렉토리의 설정을 자동으로 인식하여 사용자 지시에 따라 작업을 수행합니다.
-3. 작업 관리가 필요한 경우 `track-agent`를 호출하여 체계적인 워크플로우를 시작하세요. (상세 안내: `docs/TRACK_AGENT_GUIDE.md`)
+```bash
+# 1. 저장소 클론
+git clone https://github.com/insung/ai-workflow.git
+
+# 2. 에이전트 실행 환경 준비 (Gemini CLI 권장)
+npm install -g @google/gemini-cli
+
+# 3. track-agent 호출로 작업 시작
+gemini run track-agent "프로젝트에 신규 기능을 추가해줘"
+```
+
+## 📋 사용 가이드 (Usage)
+
+본 프로젝트의 핵심인 `track-agent`는 단순 명령 수행을 넘어 **브레인 스토밍 → 계획 → 생성 → 구현 → 리뷰 → 테스트 → 최종 확인**의 7단계를 강제합니다. 특히 `리뷰` 단계에서는 에이전트가 사용자에게 날카로운 질문(Grill-me)을 던져 설계의 안정성을 검증합니다.
+
+상세한 운영 방식은 [docs/TRACK_AGENT_GUIDE.md](docs/TRACK_AGENT_GUIDE.md)를 참조하세요.
+
+## 🤝 기여하기 (Contributing)
+새로운 에이전트나 스킬을 추가하고 싶다면 `.gemini/` 하위의 구조를 참고하여 풀 리퀘스트를 보내주세요. 모든 지시 문서는 `doc-auditor`의 검증을 거쳐야 합니다.
+
+## 📄 라이선스 (License)
+[MIT License](LICENSE)
