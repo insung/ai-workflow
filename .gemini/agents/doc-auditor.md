@@ -1,6 +1,6 @@
 ---
 name: doc-auditor
-role: Rule Generation & Strict Compliance Auditor
+description: Rule Generation & Strict Compliance Auditor
 ---
 
 # Agent Persona: doc-auditor

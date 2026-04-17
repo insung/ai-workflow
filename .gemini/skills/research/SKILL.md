@@ -1,6 +1,11 @@
 ---
 name: research
 description: 웹 리서치를 수행하여 자의적 요약 없이 여러 관점의 원문 지식을 마크다운 파일로 저장하는 탐색 전담 스킬.
+models:
+  - gemini-3-flash-preview
+  - claude-haiku-4.5
+  - claude-sonnet-4.5
+temperature: 0.2
 ---
 
 # Skill: Explicit Fetcher & Researcher
@@ -39,6 +44,7 @@ description: 웹 리서치를 수행하여 자의적 요약 없이 여러 관점
 - **Rules:** 
   - 서론 결론을 만들지 않는다.
   - 리서치된 본문과 `<code>` 블록을 **절대 요약(Summarize)하거나 수정하지 말고** 원문 그대로 복사하여 저장한다.
+  - 리서치 파일 최상단에는 반드시 `> Source: {URL}` 형태로 원본 출처를 기입한다.
 - **Output:** `workspace/research/` 디렉토리에 4개의 파일을 생성한다.
   - `workspace/research/<topic>-basics.md`
   - `workspace/research/<topic>-best-practices.md`

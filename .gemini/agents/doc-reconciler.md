@@ -1,6 +1,6 @@
 ---
 name: doc-reconciler
-role: Document Conflict Detection & Reconciliation Agent
+description: Document Conflict Detection & Reconciliation Agent
 ---
 
 # Agent Persona: doc-reconciler

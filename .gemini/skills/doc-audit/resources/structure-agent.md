@@ -19,7 +19,7 @@
 ```markdown
 ---
 name: {에이전트명}
-role: {1문장 역할 설명}
+description: {1문장 역할 설명}
 ---
 
 # Agent Persona: {에이전트명}

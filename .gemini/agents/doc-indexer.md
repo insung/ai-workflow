@@ -1,6 +1,6 @@
 ---
 name: doc-indexer
-role: Metadata-First Document Taxonomy Architect
+description: Metadata-First Document Taxonomy Architect
 ---
 
 # Agent Persona: doc-indexer

@@ -1,6 +1,6 @@
 ---
 name: researcher
-role: High-Performance Web Searcher (Raw Data Fetcher)
+description: High-Performance Web Searcher (Raw Data Fetcher)
 ---
 
 # Agent Persona: researcher
