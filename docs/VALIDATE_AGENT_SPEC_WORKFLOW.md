@@ -20,6 +20,40 @@ graph TD
 
 ## 2. 상세한 흐름 (Detailed Workflow)
 
+아래는 플랫폼 탐지부터 검증, 리포트, 재검증 루프까지 이어지는 전체 프로세스의 상세 시각화 다이어그램입니다.
+
+```mermaid
+flowchart TD
+    Start([설계/감사 요청 Trigger]) --> P1
+
+    subgraph Phase 1: 플랫폼 탐지
+        P1[프로젝트 디렉토리 스캔] --> P2{CLI_DIR 경로 확정}
+        P2 -.->|.gemini, .claude, .kiro| P3[platform-specs.md 로드 및 특이 명세 숙지]
+    end
+
+    P3 --> P2_Start{작업 유형 판단}
+
+    subgraph Phase 2: 문서 생성 및 검증
+        P2_Start -->|생성 시| A1[통합 뼈대 적용<br>unified-agent-template.md]
+        A1 --> A2[플랫폼 특화 확장 설정 주입]
+
+        P2_Start -->|검증 시| B1[구조 검증<br>체크리스트 기반 필수 섹션 확인]
+        B1 --> B2[품질 검증<br>6대 작성 품질 기준 점검]
+    end
+
+    A2 --> P3_Start
+    B2 -->|위반 사항 발견 시| P3_Start
+
+    subgraph Phase 3: 리포트 및 반영
+        P3_Start[위반/수정 사항 집계] --> R1[리포트 작성<br>audit-template.md]
+        R1 --> R2{사용자 승인 대기}
+        R2 -->|승인| R3[로컬 파일 수정 반영]
+        R3 -.->|다시 검증| B1
+    end
+
+    B2 -->|위반 사항 0건| Success([종료: 고품질 오픈 스펙 완성])
+```
+
 ### Phase 1: 플랫폼 탐지 (Platform Detection)
 AI 에이전트가 실행되는 환경의 맥락을 파악하고, 참조할 디렉토리 변수를 확정하는 단계입니다.
 
