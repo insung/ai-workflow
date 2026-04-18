@@ -1,15 +1,23 @@
-# Track Closure Report
+# Track Closure Report: {트랙명}
 
-## 1. 목표 달성 요약 (Goal Achieved)
-- [이번 트랙에서 달성한 핵심 목표 1~2문장 요약]
+## 1. Result Summary (목표 달성 결과)
+- **핵심 성과**: {이번 트랙에서 달성한 핵심 가치 요약}
+- **상태**: ✅ 완료 / ⏸️ 중단 (이유 기술)
 
-## 2. 핵심 변경 파일 (Modified Files)
-- `path/to/modified_file1.ext`: 변경된 핵심 로직 설명
-- `path/to/modified_file2.ext`: 변경된 핵심 로직 설명
+## 2. Key Changes (주요 변경 사항)
+- **로직 변경**: {어떤 핵심 알고리즘이나 구조가 바뀌었는가}
+- **파일 변경**:
+    - `path/to/file`: {변경 목적}
 
-## 3. 아키텍처/의존성 변화 (Architectural Changes)
-- [의존성 패키지 추가 여부]
-- [설계 패턴 또는 아키텍처 관점에서의 변경 사항]
+## 3. Lessons Learned (기술적 교훈)
+*이 섹션의 내용은 `~/.track/{project_name}/LESSONS.md`에 반드시 업데이트되어야 합니다.*
 
-## 4. 남은 기술 부채 (Technical Debt/TODOs)
-- [해결하지 못했거나 추후 개선이 필요한 엣지 케이스, 성능 이슈 등]
+- **성공 요인**: {잘된 점, 유지해야 할 패턴}
+- **시행착오**: {어려웠던 점, 실수했던 부분 및 해결 방법}
+- **Anti-Patterns**: {다시는 하지 말아야 할 방식}
+
+## 4. Technical Debt & Next Steps (잔여 부채 및 후속 작업)
+- **미해결 이슈**: {이번 트랙에서 처리하지 못한 엣지 케이스}
+- **후속 트랙 제안**: {이 작업으로 인해 파생된 새로운 작업 아이디어}
+
+---

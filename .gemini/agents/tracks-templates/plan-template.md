@@ -1,33 +1,32 @@
-# {트랙명}
+# Track Plan: {트랙명}
 
-## 목표
-- {구체적 목표}
+## 1. 개요 (Overview)
+- **Context**: {이 작업이 왜 필요한지에 대한 배경}
+- **Goal**:
+    - [ ] {상세 목표 1}
+    - [ ] {상세 목표 2}
 
-## 워크플로우 상태
-브레인 스토밍 → **계획 작성 중** → 트랙 생성 중 → 기능 구현 → 리뷰 → 테스트 → 최종 확인
+## 2. 아키텍처 및 파일 책임 (Architecture & Boundaries)
+*변경되는 파일들의 역할과 영향 범위를 사전에 정의합니다.*
 
-## 계획 워크플로우 (상세)
-{단계A} → {단계B} → {단계C} → {단계D}
+- **[Create]**
+    - `path/to/new_file`: {역할 및 책임}
+- **[Modify]**
+    - `path/to/existing_file`: {수정할 로직 및 이유}
+- **[Verification/Test]**
+    - `path/to/test_file`: {검증 시나리오}
 
-## 파일 책임 (File Boundaries)
-- **Create:** `경로/파일명` (역할 설명)
-- **Modify:** `경로/파일명:라인` (수정 범위)
-- **Test:** `경로/테스트파일명` (검증 대상)
+## 3. 구현 단계 (Execution Roadmap - TDD Units)
+*각 작업은 5분 내외의 TDD 사이클로 분해하며, 추상적인 placeholder를 배제합니다.*
 
-## 실행 워크플로우
-> 트랙 종료 시 작성 (실제 실행된 흐름 기록)
+- [ ] **Step 1: {기능명} 기초 구현** (todos/1-{task-name}.md)
+    - [ ] 실패하는 테스트 작성 (`test_...`)
+    - [ ] 최소 구현 및 테스트 통과
+    - [ ] 코드 정리 및 커밋
+- [ ] **Step 2: {기능명} 확장** (todos/2-{task-name}.md)
+- [ ] **Step 3: 통합 및 최종 검증**
 
-## 체크리스트 (TDD Task 분해)
-*각 하위 작업(Task)은 2~5분 내외의 TDD 사이클 단위로 구성되어야 하며, 상세한 구현 및 명령어 내용은 해당 `todos/` 파일에 기술합니다.*
+## 4. 발견된 사항 및 기술 부채 (Discovered & Debt)
+*작업 중 발견된 새로운 이슈는 `notes/discovered.md`에 기록하고, 여기에는 핵심 요약만 남깁니다.*
 
-- [ ] 1. [{작업명}](todos/1-{작업명}.md)
-  - `todos/1-{작업명}.md` 내부 필수 구성 요소:
-    - Step 1: Write failing test
-    - Step 2: Run test (fail)
-    - Step 3: Minimal implementation
-    - Step 4: Run test (pass)
-    - Step 5: Commit
-- [ ] 2. [{작업명}](todos/2-{작업명}.md)
-- [ ] 3. [{작업명}](todos/3-{작업명}.md)
-- [ ] 4. [{작업명}](todos/4-{작업명}.md)
-- [ ] 5. [{작업명}](todos/5-{작업명}.md)
+---
