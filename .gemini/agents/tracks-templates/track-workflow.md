@@ -23,7 +23,8 @@ PHASE: Brainstorming > Planning > Initializing > [ 🚀 CURRENT_PHASE ] > Review
 
 ## Rule 2: Single Source of Truth (SSOT)
 - **plan.md**: 현재 작업의 모든 설계와 구현 단계를 담은 마스터 설계도.
-- **audit.md**: 모든 기술적 의사결정의 맥락과 근거를 기록하는 블랙박스 로그.
+- **audit.md**: 모든 기술적 의사결정의 맥락과 근거를 기록하는 블랙박스 로그. (User Instruction 원본 보존 필수)
+- **todos/**: 원자적 구현 단위를 관리하며, 반드시 **`todo-template.md`** 형식을 따르고 모든 항목에 체크박스(`- [ ]`)를 포함해야 한다.
 - **LESSONS.md**: 프로젝트 전체의 지혜가 담긴 오답 노트로, 리뷰 단계의 1순위 참조 대상.
 
 ## Rule 3: Global Persistence

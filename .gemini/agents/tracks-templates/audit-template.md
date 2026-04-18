@@ -8,6 +8,7 @@
 
 ### 1. Context Analysis
 **User Instruction:**
+> [CRITICAL] Copy the exact user message without any modification.
 ```markdown
 {사용자 지시 원문}
 ```
