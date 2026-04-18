@@ -1,9 +1,9 @@
 ---
-name: brainstorming
+name: track-brainstorming
 description: "기능을 추가하거나 코드를 작성하는 등 창의적인 작업을 시작하기 전에 반드시 사용해야 합니다. 개발 구현 전에 사용자의 의도, 요구사항, 설계를 탐색하고 확정합니다."
 ---
 
-# 아이디어를 설계로 구체화하기 (Brainstorming)
+# 아이디어를 설계로 구체화하기 (Track-Brainstorming)
 
 단순한 아이디어를 구체적인 설계와 스펙(Spec)으로 변환하기 위해 사용자와 자연스럽게 협업하며 대화합니다.
 
@@ -29,7 +29,7 @@ description: "기능을 추가하거나 코드를 작성하는 등 창의적인 
 6. **설계 문서(Spec) 작성** — `~/.track/{project_name}/specs/YYYY-MM-DD-<topic>-design.md` 경로에 저장하고 커밋
 7. **설계안 자체 검토 (Self-review)** — Placeholder("TBD"), 모순, 모호함, 스코프 문제 등을 빠르게 확인하고 인라인 수정
 8. **사용자의 문서 리뷰** — 다음 단계로 가기 전 작성된 Spec 파일을 사용자가 검토하도록 요청
-9. **구현 계획으로 전환** — `writing-plans` 스킬을 호출하여 구현 계획(Plan) 수립 시작
+9. **구현 계획으로 전환** — `track-writing-plans` 스킬을 호출하여 구현 계획(Plan) 수립 시작
 
 ## 프로세스 흐름
 
@@ -45,7 +45,7 @@ digraph brainstorming {
     "설계 문서 작성" [shape=box];
     "자체 검토\n(인라인 수정)" [shape=box];
     "사용자 리뷰?" [shape=diamond];
-    "writing-plans 스킬 호출" [shape=doublecircle];
+    "track-writing-plans 스킬 호출" [shape=doublecircle];
 
     "프로젝트 컨텍스트 탐색" -> "시각적 질문이 필요한가?";
     "시각적 질문이 필요한가?" -> "시각적 도우미 제안\n(단일 메시지)" [label="yes"];
@@ -59,11 +59,11 @@ digraph brainstorming {
     "설계 문서 작성" -> "자체 검토\n(인라인 수정)";
     "자체 검토\n(인라인 수정)" -> "사용자 리뷰?";
     "사용자 리뷰?" -> "설계 문서 작성" [label="수정 요청됨"];
-    "사용자 리뷰?" -> "writing-plans 스킬 호출" [label="승인됨"];
+    "사용자 리뷰?" -> "track-writing-plans 스킬 호출" [label="승인됨"];
 }
 ```
 
-**최종 도달 상태는 `writing-plans` 스킬 호출입니다.** 브레인스토밍이 끝난 직후 코드 구현 스킬을 직접 호출하지 마십시오. 오직 `writing-plans`만 호출해야 합니다.
+**최종 도달 상태는 `track-writing-plans` 스킬 호출입니다.** 브레인스토밍이 끝난 직후 코드 구현 스킬을 직접 호출하지 마십시오. 오직 `track-writing-plans`만 호출해야 합니다.
 
 ## 진행 방식 (The Process)
 
@@ -94,7 +94,7 @@ digraph brainstorming {
 > "설계 문서(Spec)가 `<경로>`에 저장되고 커밋되었습니다. 문서를 검토해 주시고, 수정할 내용이 없다면 승인해 주세요. 승인 시 구현 계획(Plan) 작성을 시작하겠습니다."
 
 **구현:**
-- 사용자가 문서 리뷰를 마치고 승인하면, `writing-plans` 스킬을 호출하여 디테일한 구현 계획을 수립합니다.
+- 사용자가 문서 리뷰를 마치고 승인하면, `track-writing-plans` 스킬을 호출하여 디테일한 구현 계획을 수립합니다.
 
 ## 핵심 원칙
 - **한 번에 한 질문 (One question at a time)**
