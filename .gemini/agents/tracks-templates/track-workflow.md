@@ -1,43 +1,47 @@
 # Track Management Protocol (v2.0)
 
-AI 에이전트가 작업 트랙을 생성·관리·완료하는 엔지니어링 프로토콜.
+AI 에이전트가 작업 트랙을 생성·관리·완료하는 표준 엔지니어링 프로토콜.
 
-## Rule 1: 워크플로우 7단계 (Phases)
-트랙 생명주기는 아래 7단계를 따른다. 상태 전환 시 에이전트의 **채팅 응답(대화창)** 최상단에 마크다운 인용구(`>`)로 컨텍스트 헤더를 반드시 노출하라. **(주의: 이 헤더를 `plan.md` 등 파일 내용에 절대 포함시키지 마라.)**
-형식: `> 🎯 목표: [목표] | 🔄 상태: 브레인 스토밍 > 계획 작성 중 > 트랙 생성 중 > 기능 구현 > 리뷰 > 테스트 > 최종 확인`
+## Rule 1: Phase Management (7단계 생명주기)
+모든 트랙은 아래 7단계를 순차적으로 수행한다. 에이전트는 채팅 응답 최상단에 아래 형식의 **Status Header**를 반드시 노출한다. (현재 진행 중인 단계에만 🚀 표시)
 
-1. **브레인 스토밍 (Brainstorming)**: 의도 파악 및 대략적인 방향 설정
-2. **계획 작성 중 (Planning)**: `plan.md` 설계 및 TDD 단위 분해
-3. **트랙 생성 중 (Creating Track)**: 트랙 파일 초기화 및 현황판 등록
-4. **기능 구현 (Implementation)**: TDD 사이클 반복 및 코드 작성
-5. **리뷰 (Review)**: 영향도 분석 및 Grill-me 질문
-6. **테스트 (Testing)**: 통합 테스트 및 최종 검증
-7. **최종 확인 (Final Verification)**: 트랙 종료 리포트 및 LESSONS 업데이트
+```markdown
+---
+TRACK: {트랙명}
+GOAL:  {목표 요약}
+PHASE: Brainstorming > Planning > Initializing > [ 🚀 CURRENT_PHASE ] > Review > Testing > Finalizing
+---
+```
 
-## Rule 2: 트랙 경로 및 SSOT
-- **기본 경로**: 사용자 홈 디렉토리 하위의 전역 트랙 저장소인 `~/.track/{project_name}/` 디렉토리를 사용한다. (예: `/home/user/.track/ai-workflow/`)
-- **경로 생성 원칙**: 프로젝트별로 격리하되 로컬 저장소를 오염시키지 않기 위해 반드시 홈 디렉토리(`~` 또는 `$HOME`)를 기반으로 절대 경로를 확장하여 사용하라.
-- **구조**: `YYYY-MM/DD_HHMM_{핵심-내용}/`
-- **SSOT**: `plan.md`는 현재 작업의 설계도이며, `audit.md`는 모든 의사결정의 블랙박스 기록이다.
+1. **Brainstorming**: 요구사항 분석 및 설계(Spec) 수립
+2. **Planning**: TDD 기반의 상세 구현 계획(`plan.md`) 및 원자적 단위(`todos/`) 분해 (Progress Bar의 기준)
+3. **Initializing Track**: 트랙 디렉토리 초기화 및 현황판 등록
+4. **Implementation**: TDD 사이클 반복을 통한 기능 구현
+5. **Review**: 영향도 분석 및 **(권장)안이 포함된 선택지 기반 Grill-me 인터뷰**
+6. **Testing**: 통합 테스트 및 최종 품질 검증
+7. **Finalizing**: Closure Report 작성 및 지식 자산화 (LESSONS.md 업데이트)
 
-## Rule 3: '계획 작성 중' 상세화 프로토콜
-- `plan.md`와 `todos/` 작성 시 TDD 사이클을 최소 단위로 분해한다.
-- **File Boundaries**: 수정/생성/테스트할 파일을 명확히 구분하여 '변경 범위(Blast Radius)'를 정의한다.
+## Rule 2: Single Source of Truth (SSOT)
+- **plan.md**: 현재 작업의 모든 설계와 구현 단계를 담은 마스터 설계도.
+- **audit.md**: 모든 기술적 의사결정의 맥락과 근거를 기록하는 블랙박스 로그.
+- **LESSONS.md**: 프로젝트 전체의 지혜가 담긴 오답 노트로, 리뷰 단계의 1순위 참조 대상.
 
-## Rule 4: '리뷰' 및 Grill-me 프로토콜
-- 기능 구현 완료 후, 에이전트는 즉시 코드를 제출하는 대신 **Grill-me 모드**에 진입한다.
-- `LESSONS.md`를 로드하여 과거에 범했던 실수와 유사한 패턴이 있는지 검증한다.
-- **다각적 영향 리포트**를 제시하고, 사용자가 간과했을 가능성이 있는 엣지 케이스에 대해 **날카로운 질문**을 던진다.
+## Rule 3: Global Persistence
+- 트랙 데이터는 프로젝트 폴더를 오염시키지 않도록 사용자 홈 디렉토리(`~/.track/{project_name}/`) 하위에서 관리한다.
+- 경로 구조: `YYYY-MM/{DD_HHMM_track_name}/`
 
-## Rule 5: 트랙 종료 및 지식 자산화
-- `plan.md`의 모든 체크박스 완료 후 사용자 승인을 받는다.
-- **Phase 7 수행 사항**:
-  1. `closure-report.md` 작성
-  2. `LESSONS.md` 하단에 이번 트랙에서 얻은 크리티컬한 교훈(Anti-patterns 등)을 3줄 이내로 누적 기록.
-  3. `status.md` 상태를 `✅ 완료`로 변경.
+## Rule 4: Review & Grill-me Protocol
+- 구현 완료 직후 승인을 요청하지 않는다.
+- `LESSONS.md` 로드 실패 시 조용히 건너뛰고 `audit.md`에 기록한다.
+- **Grill-me Selection**: 엣지 케이스에 대해 2~3가지 해결 대안(Option A, B, C)을 제시하며, 반드시 **(권장)** 안을 포함하여 사용자의 의사결정을 돕는다.
 
-## 금지 조항 (Negative Constraints)
-- [DANGER] `plan.md`의 목표와 상관없는 리팩토링이나 코드 수정을 금지한다.
-- [DANGER] `audit.md` 기록 없이 주요 기술적 결정을 내리지 마라.
-- [DANGER] 실패하는 테스트 없이 구현 코드를 먼저 작성하지 마라.
-- [DANGER] 사용자가 명시적으로 지시하지 않는 한 프로젝트 로컬의 `.track/` 경로에 트랙을 생성하지 마라. 항상 `~/.track/{project_name}/`을 우선하라.
+## Rule 5: Knowledge Assetization (트랙 종료)
+- 모든 체크리스트 완료 후 다음을 수행한다:
+  1. `closure-report.md` 작성 (성공 요인, 시행착오 기록)
+  2. `LESSONS.md`에 이번 트랙의 핵심 교훈을 3줄 이내로 업데이트
+  3. **사용자의 최종 승인을 확인한 후**, 전역 `status.md`를 `✅ 완료`로 변경
+
+## Negative Constraints (금지 조항)
+- [DANGER] 계획되지 않은 임의의 코드 수정을 절대 금지한다.
+- [DANGER] 실패하는 테스트 케이스 없이 구현 코드를 먼저 작성하지 마라.
+- [DANGER] `audit.md`에 기록되지 않은 중요한 설계 변경을 금지한다.

@@ -1,23 +1,38 @@
-# Track Closure Report: {트랙명}
+# Track Closure Report: {track_name}
 
-## 1. Result Summary (목표 달성 결과)
-- **핵심 성과**: {이번 트랙에서 달성한 핵심 가치 요약}
-- **상태**: ✅ 완료 / ⏸️ 중단 (이유 기술)
+## 1. Executive Summary
+- **Outcome**: {트랙 목표 달성 여부 및 핵심 성과 요약}
+- **Status**: ✅ Completed / ⏸️ Suspended (Reason)
+- **Duration**: {YYYY-MM-DD} ~ {YYYY-MM-DD}
 
-## 2. Key Changes (주요 변경 사항)
-- **로직 변경**: {어떤 핵심 알고리즘이나 구조가 바뀌었는가}
-- **파일 변경**:
-    - `path/to/file`: {변경 목적}
+---
 
-## 3. Lessons Learned (기술적 교훈)
+## 2. Key Technical Changes
+*이번 트랙을 통해 변경된 핵심 아키텍처나 로직을 기록합니다.*
+
+| Scope | Changes |
+| :--- | :--- |
+| **Logic** | {주요 알고리즘 변경 또는 신규 패턴 도입 내용} |
+| **Files** | `path/to/file`: {변경 목적 및 결과} |
+
+---
+
+## 3. Lessons Learned (Knowledge Asset)
 *이 섹션의 내용은 `~/.track/{project_name}/LESSONS.md`에 반드시 업데이트되어야 합니다.*
 
-- **성공 요인**: {잘된 점, 유지해야 할 패턴}
-- **시행착오**: {어려웠던 점, 실수했던 부분 및 해결 방법}
-- **Anti-Patterns**: {다시는 하지 말아야 할 방식}
+### ✅ Success Patterns
+- {잘 진행된 점, 프로젝트 전체에 권장할 만한 코딩 패턴이나 작업 방식}
 
-## 4. Technical Debt & Next Steps (잔여 부채 및 후속 작업)
-- **미해결 이슈**: {이번 트랙에서 처리하지 못한 엣지 케이스}
-- **후속 트랙 제안**: {이 작업으로 인해 파생된 새로운 작업 아이디어}
+### ⚠️ Trials & Errors
+- {작업 중 마주친 장애물, 실수했던 부분 및 이를 어떻게 해결했는지에 대한 기록}
+
+### 🚫 Anti-Patterns
+- {추후 유사 작업 시 절대로 반복하지 말아야 할 접근 방식}
+
+---
+
+## 4. Remaining Debt & Next Steps
+- **Technical Debt**: {시간 관계상 처리하지 못한 엣지 케이스나 리팩토링 대상}
+- **Future Tracks**: {이 작업으로부터 파생된 새로운 아이디어나 후속 작업 제안}
 
 ---
