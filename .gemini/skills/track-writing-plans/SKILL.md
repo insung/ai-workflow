@@ -1,6 +1,7 @@
 ---
 name: track-writing-plans
 description: "다중 단계 작업에 대한 설계안(Spec)이나 요구사항이 있을 때, 실제 코드를 작성하기 전에 세부 구현 계획을 수립하기 위해 사용합니다."
+disable-model-invocation: true
 ---
 
 # 구현 계획 작성하기 (Track-Writing-Plans)

@@ -40,7 +40,7 @@ PHASE: Brainstorming > Planning > Initializing > [ 🚀 CURRENT_PHASE ] > Review
 - 모든 체크리스트 완료 후 다음을 수행한다:
   1. `closure-report.md` 작성 (성공 요인, 시행착오 기록)
   2. `LESSONS.md`에 이번 트랙의 핵심 교훈을 3줄 이내로 업데이트
-  3. **사용자의 최종 승인을 확인한 후**, 전역 `status.md`를 `✅ 완료`로 변경
+  3. **사용자의 최종 승인을 확인한 후**, 전역 `{YYYY-MM}-status.md`의 작업한 트랙을 `✅ 완료`로 변경
 
 ## Negative Constraints (금지 조항)
 - [DANGER] 계획되지 않은 임의의 코드 수정을 절대 금지한다.

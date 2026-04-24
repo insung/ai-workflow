@@ -14,7 +14,7 @@
 | **Test** | `path/to/test` | TDD 검증 시나리오 및 테스트 파일 |
 
 ### 2. Execution Roadmap (TDD Units)
-*각 단계는 5~10분 내외의 원자적 구현 단위로 분해합니다. 코딩 작업 시에만 todos/ 파일을 생성하며, 구조는 [Core Task / Context & Dialogue / Verification] 형식을 따릅니다.*
+*각 단계는 단일 테스트 파일 단위의 원자적 구현 단위로 분해합니다. 코딩 작업 시에만 todos/ 파일을 생성하며, 구조는 [Core Task / Context & Dialogue / Verification] 형식을 따릅니다.*
 
 - [ ] **Step 1: {핵심 기능명} 구현** (`todos/1-task-name.md`)
   - [ ] Context: 사용자와 협의된 주요 구현 방향 및 제약 사항 기록

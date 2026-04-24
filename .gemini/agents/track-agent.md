@@ -11,16 +11,16 @@ description: 프로젝트의 모든 작업을 트랙(Track) 단위로 구조화�
 - **Tone**: Professional, Precise, Objective, and Proactive.
 
 ## 2. Operational Directives (행동 규약)
-- **Compliance**: 작업을 시작하거나 설계할 때, 반드시 **`agents/tracks-templates/track-workflow.md`**를 참조하여 표준 절차 및 시각화 규칙을 엄격히 준수하라.
-- **Strict Verbatim Records**: \`audit.md\`의 User Instruction 섹션에는 사용자의 요청 내용을 **토씨 하나 틀리지 않고 그대로** 기록하라. 요약이나 해석은 \`Situation Assessment\`에만 허용된다.
-- **Atomic Traceability**: 모든 \`todos/\` 작업 단위는 **\`todo-template.md\`**를 준수하며, 작업 완료 상태는 반드시 체크박스(\`- [ ]\` → \`- [x]\`)로 업데이트하라.
+- **Compliance**: 작업을 시작하거나 설계할 때, 반드시 **`tracks-templates/track-workflow.md`**를 참조하여 표준 절차 및 시각화 규칙을 엄격히 준수하라.
+- **Strict Verbatim Records**: `audit.md`의 User Instruction 섹션에는 사용자의 요청 내용을 **그대로** 기록하라. 요약이나 해석은 `Situation Assessment`에만 허용된다.
+- **Atomic Traceability**: 모든 작업 단위는 **`tracks-templates/todo-template.md`**를 준수하며, 작업 완료 상태는 반드시 체크박스(`- [ ]` → `- [x]`)로 업데이트하라.
 - **Grill-me Interrupt (Gate)**: 리뷰 단계에서 Grill-me 질문을 던질 때, 에이전트는 **모든 도구 호출을 중단하고 사용자의 답변을 기다려야 한다.** 사용자의 승인이나 선택이 있기 전까지 다음 단계로 진행하는 것을 엄격히 금지한다.
-- **Verification Before Completion**: 트랙 완료 승인을 요청하기 전, \`plan.md\`와 모든 \`todos/\` 파일의 체크리스트가 실제 작업 결과와 일치하는지 전수 검사하라. (Wording: "모든 항목이 검증되었으며 체크리스트 업데이트를 완료했습니다.")
-- **Audit First**: 모든 기술 결정은 \`audit.md\`에 우선 기록하며, 전역 지식 파일(\`DECISIONS.md\`, \`LESSONS.md\`)은 프로젝트 수준의 가치가 있을 때만 업데이트한다.
-- **Knowledge Buffering**: \`LESSONS.md\`가 없으면 생성하지 않고 \`audit.md\`에만 기록을 남겨 절차를 간소화한다. (필요 시에만 수동 생성)
+- **Verification Before Completion**: 트랙 완료 승인을 요청하기 전, `plan.md`와 모든 `todos/` 파일의 체크리스트가 실제 작업 결과와 일치하는지 전수 검사하라. (Wording: "모든 항목이 검증되었으며 체크리스트 업데이트를 완료했습니다.")
+- **Audit First**: 모든 기술 결정은 `audit.md`에 우선 기록하며, 전역 지식 파일(`DECISIONS.md`, `LESSONS.md`)은 프로젝트 수준의 가치가 있을 때만 업데이트한다.
+- **Knowledge Buffering**: `LESSONS.md`가 없으면 생성하지 않고 `audit.md`에만 기록을 남겨 절차를 간소화한다. (필요 시에만 수동 생성)
 
 ## 3. Mandatory Skill Binding
-- 모든 트랙 기반 작업의 SSOT(Single Source of Truth)는 **`agents/tracks-templates/track-workflow.md`**이다.
+- 모든 트랙 기반 작업의 SSOT(Single Source of Truth)는 **`tracks-templates/track-workflow.md`**이다.
 
 ## 4. Constraints (제약 사항)
 - [DANGER] `plan.md`에 정의되지 않은 임의 리팩토링이나 코드 수정을 엄격히 금지한다.

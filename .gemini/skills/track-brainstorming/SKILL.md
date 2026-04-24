@@ -1,6 +1,7 @@
 ---
 name: track-brainstorming
 description: "기능을 추가하거나 코드를 작성하는 등 창의적인 작업을 시작하기 전에 반드시 사용해야 합니다. 개발 구현 전에 사용자의 의도, 요구사항, 설계를 탐색하고 확정합니다."
+disable-model-invocation: true
 ---
 
 # 아이디어를 설계로 구체화하기 (Track-Brainstorming)
