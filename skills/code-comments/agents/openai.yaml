@@ -1,0 +1,6 @@
+interface:
+  display_name: "Code Comments"
+  short_description: "Obsidian과 VS Code의 열린 코멘트를 한 번에 확인"
+  default_prompt: "$code-comments를 사용해 작업공간의 Obsidian과 VS Code 코멘트를 확인하고 필요한 답글을 남겨줘."
+policy:
+  allow_implicit_invocation: true
