@@ -179,7 +179,6 @@ ls .github/*drafter*.yml 2>/dev/null   # 설정 파일이 있는지
 gh label list                          # 그 저장소에 있는 label 이름
 ```
 
-설정 파일의 `categories` 항목에 적힌 label 이름을 **그대로** 쓴다. 이모지와 띄어쓰기까지 같아야
-한다.
+설정 파일의 `categories` 항목에 적힌 label 이름을 **그대로** 쓴다. 이모지와 띄어쓰기까지 같아야 한다.
 
 커밋 type과 label을 잇는 표는 저장소마다 다르므로 만들어 두지 않는다. 설정 파일을 읽고 그때 고른다.

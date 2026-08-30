@@ -40,20 +40,16 @@ node scripts/comments.js create --workspace <workspace-root> --repo <repository>
   --file <repository-relative-file> --start-line <line> --end-line <line> --body '<comment>'
 ```
 
-답글과 본문은 셸에서 실행되지 않도록 작은따옴표로 감싸고, 본문에 작은따옴표가 있으면 안전하게
-이스케이프한다. 사용자 텍스트를 명령 치환이나 환경 변수로 평가하지 않는다.
+답글과 본문은 셸에서 실행되지 않도록 작은따옴표로 감싸고, 본문에 작은따옴표가 있으면 안전하게 이스케이프한다. 사용자 텍스트를 명령 치환이나 환경 변수로 평가하지 않는다.
 
 ## 범위 밖
 
-이 workflow는 사람과 Codex 사이의 코멘트 교환만 다룬다. 원본 `comment-cycle`의 agent dispatch,
-claim, 자동 해결, merge queue, landing과 커밋 provenance 절차는 적용하지 않는다. 커밋이 필요하면
-별도의 `commit-rule` 스킬을 사용한다.
+이 workflow는 사람과 Codex 사이의 코멘트 교환만 다룬다. 원본 `comment-cycle`의 agent dispatch, claim, 자동 해결, merge queue, landing과 커밋 provenance 절차는 적용하지 않는다. 커밋이 필요하면 별도의 `commit-rule` 스킬을 사용한다.
 
 ## 검증
 
 - `repos` 결과가 실제 Git 저장소와 일치하는지 확인한다.
 - 답글 뒤 `get`으로 작성자, 본문과 `open` 상태를 다시 읽는다.
 - 새 스레드 뒤 대상 저장소에 `.comments/threads/<thread-id>.jsonl`이 생겼는지 확인한다.
-- 코드 변경이 있으면 해당 저장소의 테스트와 `git diff --check`, `git status --short`로 범위를
-  확인한다.
+- 코드 변경이 있으면 해당 저장소의 테스트와 `git diff --check`, `git status --short`로 범위를 확인한다.
 
