@@ -9,7 +9,7 @@ Obsidian 문서와 VS Code 코드에 남긴 코멘트를 하나의 진입점에�
 
 ## 형식 판별
 
-1. 사용자가 Obsidian 또는 Tandem Comments를 명시했거나 대상 Markdown에 `tandem-comments` 블록이 있으면 [obsidian.md](references/obsidian.md)를 읽고 적용한다.
+1. 사용자가 Obsidian 또는 Tandem Comments를 명시했거나 대상 Markdown에 `tandem-comments` 블록이나 `.comments/tandem/threads/*.jsonl` 기록이 있으면 [obsidian.md](references/obsidian.md)를 읽고 적용한다.
 2. 사용자가 VS Code Comments를 명시했거나 대상 저장소에 `.comments/threads/*.jsonl`이 있으면 [vscode.md](references/vscode.md)를 읽고 적용한다.
 3. 사용자가 형식을 명시하지 않고 "코멘트 확인해줘"라고 하면 현재 작업공간에서 두 형식을 모두 탐색한다.
 
@@ -32,7 +32,7 @@ node scripts/comments.js list --workspace <workspace-root> --status open
 
 `답변 필요` 코멘트는 앵커 주변의 현재 문서나 코드를 확인하고, 사용자의 이번 요청이 허용한 범위에서 수정 또는 설명한 뒤 한국어 답글을 남긴다. 같은 내용의 Codex 답글이 이미 마지막에 있으면 중복으로 추가하지 않는다.
 
-Codex는 코멘트를 해결하거나 삭제하지 않는다. 답글을 남긴 뒤에도 열린 상태를 유지하며, 해결은 사용자가 해당 편집기에서 직접 수행한다.
+Codex는 코멘트를 해결하거나 삭제하지 않는다. 답글을 남긴 뒤에도 열린 상태를 유지하며, 해결은 사용자가 해당 편집기에서 직접 수행한다. 편집기가 해결된 Tandem 스레드를 문서에서 삭제할 수 있으므로, Obsidian workflow는 읽거나 답하기 전에 append-only 이력을 먼저 보관한다. 별도의 읽기용 Markdown 내보내기는 사용자가 명시적으로 요청할 때만 만든다.
 
 ## 해결 대기 알림
 
@@ -59,4 +59,3 @@ Obsidian Tandem Comments는 Git 저장소 여부와 관계없이 지정된 작�
 - 답변한 코멘트와 반영한 변경
 - 사용자 해결 대기 코멘트
 - 검증 결과
-

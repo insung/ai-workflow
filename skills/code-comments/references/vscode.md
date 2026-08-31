@@ -6,6 +6,7 @@
 2. `node scripts/comments.js list --workspace <workspace-root> --status open`으로 열린 스레드를 모은다.
 3. 조회 결과의 저장소, 상대 파일, 앵커와 전체 대화를 확인한다.
 4. 앵커만 보지 말고 해당 파일의 주변 코드와 현재 Git 변경을 확인한다.
+5. 스레드가 기록된 저장소에 대상 파일이 없으면 작업공간의 다른 저장소에서 같은 상대경로와 앵커를 찾는다. 한 저장소로만 확정되면 스레드를 그 저장소로 옮긴 뒤 처리하고, 둘 이상이면 사용자에게 대상을 확인한다.
 
 저장 형식과 다중 저장소 경계는 [storage-and-scope.md](storage-and-scope.md)를 따른다.
 
@@ -17,6 +18,13 @@
 - 답글과 새 스레드는 대상 저장소를 확정한 뒤 append-only 이벤트와 스레드 잠금 규칙으로 기록한다.
 - 저장소 이름이 겹치거나 대상이 둘 이상이면 쓰기 전에 사용자에게 확인한다.
 
+잘못된 저장소에 만들어진 스레드를 올바른 저장소로 옮긴다. 이 명령은 대상 파일과 앵커가 확인될 때만 실행된다.
+
+```bash
+node scripts/comments.js relocate --workspace <workspace-root> \
+  --from-repo <source-repository> --to-repo <target-repository> --thread <thread-id>
+```
+
 ## 답글과 새 스레드
 
 기존 스레드에 답글을 남긴다.
@@ -24,6 +32,13 @@
 ```bash
 node scripts/comments.js reply --workspace <workspace-root> --repo <repository> \
   --thread <thread-id> --body '<reply>'
+```
+
+답변 과정에서 앵커 문장을 수정했다면 현재 텍스트나 줄 범위로 스레드를 다시 연결한다.
+
+```bash
+node scripts/comments.js reanchor --workspace <workspace-root> --repo <repository> \
+  --thread <thread-id> --start-line <line> --end-line <line>
 ```
 
 새 스레드는 정확한 텍스트 앵커를 우선 사용한다.
@@ -52,4 +67,3 @@ node scripts/comments.js create --workspace <workspace-root> --repo <repository>
 - 답글 뒤 `get`으로 작성자, 본문과 `open` 상태를 다시 읽는다.
 - 새 스레드 뒤 대상 저장소에 `.comments/threads/<thread-id>.jsonl`이 생겼는지 확인한다.
 - 코드 변경이 있으면 해당 저장소의 테스트와 `git diff --check`, `git status --short`로 범위를 확인한다.
-

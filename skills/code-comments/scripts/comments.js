@@ -191,10 +191,9 @@ function baseline(repo, file, content) {
   const clean = git(repo, ['status', '--porcelain', '--', file]);
   const tracked = git(repo, ['ls-files', '--error-unmatch', '--', file]);
   if (tracked !== null && clean !== null && clean.trim() === '' && git(repo, ['show', `HEAD:${file}`]) === content) return { kind: 'commit', sha: head.trim() };
-  const written = git(repo, ['hash-object', '-w', '--stdin'], content);
   const buffer = Buffer.from(content, 'utf8');
   const fallback = crypto.createHash('sha1').update(`blob ${buffer.length}\0`).update(buffer).digest('hex');
-  return { kind: 'blob', sha: written ? written.trim() : fallback, commit: head.trim() };
+  return { kind: 'blob', sha: fallback, commit: head.trim() };
 }
 
 function anchorFor(repo, args) {
@@ -274,7 +273,7 @@ function print(repo, workspace, value) {
 function main() {
   const args = argsOf(process.argv.slice(2));
   const command = args._[0];
-  if (!command || args.help) return process.stdout.write('commands: repos | list | get | reply | create\n');
+  if (!command || args.help) return process.stdout.write('commands: repos | list | get | reply | create | reanchor | relocate\n');
   const workspace = path.resolve(args.workspace || process.cwd());
   const repos = discoverRepos(workspace, args.depth ? Number(args.depth) : 2);
   if (!repos.length) fail(`Git 저장소를 찾지 못했습니다: ${workspace}`);
@@ -298,6 +297,32 @@ function main() {
     get(repo, id);
     append(logPath(repo, id), 'replied', { commentId: `c_${crypto.randomUUID()}`, body: required(args, 'body') });
     return print(repo, workspace, summary(get(repo, id)));
+  }
+  if (command === 'reanchor') {
+    const id = required(args, 'thread');
+    const repo = repoForThread(repos, workspace, args.repo, id);
+    const state = get(repo, id);
+    const anchored = anchorFor(repo, { file: state.file, anchorText: args['anchor-text'], startLine: args['start-line'], endLine: args['end-line'] });
+    append(logPath(repo, id), 'reanchored', { anchor: anchored.anchor });
+    return print(repo, workspace, summary(get(repo, id)));
+  }
+  if (command === 'relocate') {
+    const id = required(args, 'thread');
+    const source = explicitRepo(repos, workspace, required(args, 'from-repo'));
+    const target = explicitRepo(repos, workspace, required(args, 'to-repo'));
+    const state = get(source, id);
+    const targetFile = path.join(target, state.file);
+    if (!fs.existsSync(targetFile)) fail(`대상 저장소에 코멘트 파일이 없습니다: ${state.file}`);
+    const targetText = fs.readFileSync(targetFile, 'utf8');
+    const headText = git(target, ['show', `HEAD:${state.file}`]) || '';
+    if (state.anchor.text && !targetText.includes(state.anchor.text) && !headText.includes(state.anchor.text)) fail(`대상 파일의 현재 내용이나 HEAD에서 앵커를 확인할 수 없습니다: ${state.file}`);
+    const sourceLog = logPath(source, id);
+    const targetLog = logPath(target, id);
+    if (fs.existsSync(targetLog)) fail(`대상 저장소에 같은 스레드가 이미 있습니다: ${id}`);
+    ensureUnionRule(target);
+    fs.mkdirSync(path.dirname(targetLog), { recursive: true });
+    fs.renameSync(sourceLog, targetLog);
+    return print(target, workspace, summary(get(target, id)));
   }
   if (command === 'create') {
     const file = required(args, 'file');
