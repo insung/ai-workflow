@@ -36,6 +36,13 @@ my-profile/
 ├── README.md
 ├── 001-career-and-work-style.md
 ├── 002-personal-context.md
+├── 003-decision-and-risk-profile.md
+├── assets/
+│   ├── 001-stock-investing-radar.svg
+│   └── 002-risk-pattern-radar.svg
+├── questionnaires/
+│   ├── 001-stock-investing-radar.md
+│   └── 002-decision-and-risk-radar.md
 └── finances/
     ├── 001-financial-plan.md
     ├── 002-financial-snapshot-YYYY-MM.md
@@ -46,6 +53,8 @@ my-profile/
 
 - `001-career-and-work-style.md`: 경력, 가치관, 공통 업무 성향
 - `002-personal-context.md`: 프로젝트 우선순위에 영향을 주는 개인 배경. 식별 정보는 제외
+- `003-decision-and-risk-profile.md`: 여러 영역에서 반복되는 의사결정 강점, 취약 패턴과 방어 규칙
+- `questionnaires/`: 프로필 레이더의 안정적인 축, 반복 질문, 답변과 시점별 점수
 - `001-financial-plan.md`: 목표, 제약, 자금 운용 원칙과 확인할 질문
 - `002-financial-snapshot-YYYY-MM.md`: 그 시점의 소득, 자산, 부채, 평가금과 기준일
 - `003-stock-investing.md`: 투자 노하우, 판단 기준, 전략별 유지·중단 조건
@@ -55,6 +64,8 @@ my-profile/
 금액과 종목 비중은 snapshot이 정본이다. 계획 문서에 같은 수치를 반복하지 않는다. snapshot의 실제 관측일을 모르면 그 사실을 명시하고 현재 값처럼 쓰지 않는다.
 
 새 snapshot은 `assets/financial-snapshot-template.md`를 사용한다. 실제로 확인되지 않은 절은 빈칸이나 추정값으로 채우지 않고 제거하거나 `확인 필요`에 기록한다. 계좌번호, 로그인 정보와 API 자격증명은 snapshot에 기록하지 않는다.
+
+레이더 질문지는 프로필 본문과 갱신 주기가 다르므로 별도 `questionnaires/`에 둔다. 상위 `my-profile/README.md`가 직접 나열하므로 질문지 수가 적은 동안에는 하위 README를 만들지 않는다. 질문 설계, 점수, 재평가와 새 차트 판정은 `radar-assessments.md`를 따른다.
 
 ## 파일과 디렉터리 분리
 
@@ -74,9 +85,10 @@ my-profile/
 
 - 경로는 소문자 영문 kebab-case를 기본으로 하고 본문은 한국어로 쓴다.
 - 본문 산문에는 고정 폭 하드 래핑을 사용하지 않는다. 한 문단은 한 줄로 쓰며, 의미 단락과 Markdown 구조를 보존하기 위한 줄바꿈만 사용한다.
-- `my-profile/`의 일반 문서는 각 디렉터리 안에서 읽는 역할을 나타내는 3자리 접두사 (`001-`, `002-`)를 붙인다. 번호는 생성 순서가 아니라 문서 역할의 순서이므로 기존 문서 사이에 새 파일이 생겼다는 이유만으로 모두 다시 번호 매기지 않는다.
+- 허브 루트 바로 아래의 파일은 1단계 진입점이므로 `GOAL.md`처럼 숫자 접두사 없이 이름을 붙인다.
+- 최상위 주제 디렉터리 아래에 있는 문서와 asset은 깊이가 더 늘어나더라도 각 디렉터리 안에서 역할·읽기 순서를 나타내는 3자리 접두사 (`001-`, `002-`)를 붙인다. 예를 들어 `my-profile/001-career-and-work-style.md`와 `my-profile/assets/001-stock-investing-radar.svg`처럼 쓴다. 번호는 생성 순서가 아니라 해당 디렉터리 안의 역할 순서이므로 기존 파일 사이에 새 파일이 생겼다는 이유만으로 모두 다시 번호 매기지 않는다.
 - 같은 역할의 시점 기록은 같은 번호를 공유한다. 예를 들어 모든 재정 snapshot은 `002-financial-snapshot-YYYY-MM.md`로 이름을 붙여 새 snapshot이 생겨도 다른 문서의 번호와 링크가 바뀌지 않게 한다.
-- `README.md`는 진입점 이름이므로 숫자 접두사를 붙이지 않는다. 이 접두사 규칙을 다른 최상위 주제에 자동으로 확대하지 않고, 해당 주제의 읽기 순서가 실제로 필요할 때 별도로 정한다.
+- `README.md`, 숨김 설정 파일, 도구가 요구하는 고정 이름에는 숫자 접두사를 붙이지 않는다. 사용자가 특정 파일을 예외로 지정하면 그 지시를 우선한다.
 - 공백, `final`, `new`, `latest`, 버전 의미가 불명확한 `v2`를 사용하지 않는다.
 - 시점 기록은 `NNN-주제-snapshot-YYYY-MM.md` 또는 `NNN-YYYY-MM-DD-주제.md`로 기준일을 드러낸다.
 - 허브 루트와 독자가 직접 들어오는 최상위 주제는 `README.md`를 기본 진입점으로 사용한다.
@@ -110,6 +122,14 @@ status: proposed
 - `approved`: 사용자가 내용과 사용 범위를 승인함
 - `archived`: 현행 문서가 아니며 대체 또는 종료 이유가 있음
 
+상태는 다음처럼 전환한다.
+
+- `proposed → approved`: 사용자가 내용과 사용 범위를 확인함
+- `approved → proposed`: 큰 재구성이나 새로운 미확인 사실 때문에 다시 검토가 필요함
+- `proposed|approved → archived`: 더 이상 현행이 아니며 대체 문서 또는 종료 이유가 기록됨
+
+열린 코멘트 자체는 승인 차단 조건이 아니다. 미확인 사실이나 결정에 관한 코멘트가 남아 있으면 `proposed`를 유지하고, 형식 질문이나 답변 완료 후 사용자의 해결 조작만 기다리는 코멘트는 사용자의 명시적 승인 판단과 분리한다.
+
 `my-profile/` 아래 문서는 별도 frontmatter가 없어도 기본 비공개다. 공개 여부는 frontmatter 속성으로 관리하지 않는다. AI는 기본 비공개 문서의 내용을 공개·무관 문서에 복사하지 않는다. 공개 자료가 필요하면 공개 목적과 대상 문서를 먼저 확인하고 필요한 내용만 별도 문서로 추출한 뒤 사용자의 명시적 승인을 받는다. 내부 계획에서 필요할 때도 상세 개인정보를 반복하지 않고 정본을 링크한다. 실제 보호는 저장소와 파일 접근권한으로 구현한다.
 
 일반 문서와 README에는 `updated`를 두지 않는다. Git 저장소라면 수정 이력은 Git에서 확인하고, 사람이 매번 동기화해야 하는 중복 메타데이터를 만들지 않는다. 아직 Git 저장소가 아니면 파일 mtime을 문서의 의미 있는 기준일로 간주하지 않고, 변경 이력이 필요할 때 저장소 전환을 별도 결정한다. snapshot처럼 날짜가 문서 내용의 일부일 때만 `snapshot-date: YYYY-MM-DD` 또는 `snapshot-month: YYYY-MM`을 추가한다. frontmatter 값은 스칼라만 사용하고, 출처와 관련 문서 링크는 본문에 둔다.
@@ -134,6 +154,8 @@ status: proposed
 | 시점 기록 | 재정 snapshot, 당시 조사, 대화 원문 | 과거 본문을 현재 값으로 덮지 않고 새 기록 생성 |
 
 계획이 바뀌었다는 이유만으로 snapshot을 고치지 않는다. 반대로 현재 계획을 새 날짜 파일로 계속 복제하지 않는다. 파일이 언제 바뀌었는지는 Git이 갖고, 결정이 바뀐 이유는 현행 문서에 남긴다.
+
+Obsidian Tandem 코멘트의 장기 이력은 `.comments/tandem/threads/`에 append-only로 보관한다. Obsidian UI에서 과거 해결 대화를 확인해야 하면 보관된 파일 경로와 앵커를 검증한 뒤 원래 문서의 `tandem-comments` 블록에 `resolved` 상태로 복원한다. 별도의 읽기용 Markdown 생성본은 사용자가 명시적으로 요청할 때만 만든다.
 
 ## 정본과 링크
 
