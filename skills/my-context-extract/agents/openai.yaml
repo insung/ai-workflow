@@ -1,0 +1,4 @@
+interface:
+  display_name: "My Context Extract"
+  short_description: "대화에서 나의 판단 기준을 추출하고 허브 통합안을 비교"
+  default_prompt: "$my-context-extract로 이 대화에서 나의 성향과 판단 기준을 추출하고, 문서 수정 전에 파일별 통합 전후 목차를 보여줘."
