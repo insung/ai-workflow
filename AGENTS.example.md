@@ -18,6 +18,6 @@
 3. 반복 실수를 막는 데 필요한 환경 특이사항만 추가한다. OS·셸·도구 목록을 의무적으로 채우거나 다른 컴퓨터의 경로를 복사하지 않는다. 상세 절차는 관련 스킬에 둔다.
 4. 작성 안내와 미확인 값은 완성 파일에서 제외한다. 저장 내용과 새 세션의 로드 여부를 구분해 확인한다. 예제 갱신이 로컬 지침에 자동 반영된다고 가정하지 않는다.
 
-필요할 때 사용할 상세 규칙: [코멘트](skills/code-comments/SKILL.md), [문서 허브](skills/my-document-hub/SKILL.md), [맥락 추출](skills/my-context-extract/SKILL.md). 실제 사용 가능 여부는 해당 AI 환경에서 확인한다.
+필요할 때 사용할 상세 규칙: 사용자 스코프의 `sideband-comments`, [문서 허브](skills/my-document-hub/SKILL.md), [맥락 추출](skills/my-context-extract/SKILL.md). 실제 사용 가능 여부는 해당 AI 환경에서 확인한다.
 
 적용 위치 참고: [Codex](https://learn.chatgpt.com/docs/agent-configuration/agents-md), [Claude Code](https://code.claude.com/docs/en/memory).

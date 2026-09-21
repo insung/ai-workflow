@@ -13,7 +13,7 @@ description: 개인 문서 허브에서 프로필, 재정 계획, 프로젝트 �
 2. 허브와 원본 저장소의 `AGENTS.md`, `README.md`, 관련 현행 문서를 존재하는 범위에서 읽는다.
 3. 쓰기 전에 대상 경로의 기존 문서와 같은 질문에 답하는 문서를 검색한다.
 4. 자리, 파일명, 상태, 공개 경계 또는 분리 여부를 판단할 때 [document-protocol.md](references/document-protocol.md)를 읽는다.
-5. Markdown에 `tandem-comments` 블록이 있거나 사용자가 문서 코멘트를 언급하면 `code-comments` 스킬의 Obsidian workflow를 함께 적용한다. 확인한 열린 코멘트에는 한국어 답글을 남기고 `open` 상태를 유지한다. 코멘트 해결과 삭제는 사용자가 Obsidian에서 직접 처리한다.
+5. 대상 허브에 `.comments` 저장소가 있거나 사용자가 문서 코멘트를 언급하면 사용자 스코프의 `sideband-comments` 스킬을 함께 적용한다. 확인한 열린 코멘트에는 한국어 답글을 남기고 `open` 상태를 유지한다. 코멘트 해결과 삭제는 사용자가 VS Code나 Obsidian에서 직접 처리한다.
 6. 재정 현황 문서를 새로 만들 때는 [financial-snapshot-template.md](assets/financial-snapshot-template.md)를 복사해 실제로 확인된 절만 남긴다. 템플릿 자체에는 개인의 금액과 종목을 기록하지 않는다.
 7. 프로필의 레이더 차트를 만들거나 갱신할 때는 [radar-assessments.md](references/radar-assessments.md)를 읽고, 새 질문지는 [radar-questionnaire-template.md](assets/radar-questionnaire-template.md)를 사용한다.
 
