@@ -1,0 +1,452 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/request-closure/request-frame.schema.json",
+  "title": "Request Frame",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "requestId",
+    "status",
+    "depth",
+    "goal",
+    "observableOutcome",
+    "scope",
+    "acceptanceCriteria",
+    "constraints",
+    "verificationScenarios",
+    "authority",
+    "facts",
+    "inferences",
+    "assumptions",
+    "decisions",
+    "materialOpenItems",
+    "stalledRounds",
+    "approval"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "requestId": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "status": {
+      "enum": ["draft", "needs-user-direction", "approved"]
+    },
+    "depth": {
+      "enum": ["L1", "L2", "L3"]
+    },
+    "goal": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "observableOutcome": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "scope": {
+      "type": "object",
+      "required": ["included", "excluded"],
+      "properties": {
+        "included": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "excluded": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        }
+      }
+    },
+    "acceptanceCriteria": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/statementItem"
+      }
+    },
+    "constraints": {
+      "$ref": "#/$defs/nonEmptyStringArray"
+    },
+    "verificationScenarios": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/verificationScenario"
+      }
+    },
+    "authority": {
+      "$ref": "#/$defs/authority"
+    },
+    "facts": {
+      "$ref": "#/$defs/statementArray"
+    },
+    "inferences": {
+      "$ref": "#/$defs/statementArray"
+    },
+    "assumptions": {
+      "$ref": "#/$defs/statementArray"
+    },
+    "decisions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/decision"
+      }
+    },
+    "materialOpenItems": {
+      "$ref": "#/$defs/statementArray"
+    },
+    "stalledRounds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "approval": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/approval"
+        }
+      ]
+    },
+    "alternatives": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/alternative"
+      }
+    },
+    "affectedPaths": {
+      "$ref": "#/$defs/nonEmptyStringArray"
+    },
+    "sideEffects": {
+      "$ref": "#/$defs/nonEmptyStringArray"
+    },
+    "reversibility": {
+      "$ref": "#/$defs/reversibility"
+    },
+    "rollback": {
+      "$ref": "#/$defs/rollback"
+    },
+    "riskImpact": {
+      "$ref": "#/$defs/riskImpact"
+    },
+    "independentReview": {
+      "$ref": "#/$defs/independentReview"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "depth": {
+            "enum": ["L2", "L3"]
+          }
+        },
+        "required": ["depth"]
+      },
+      "then": {
+        "required": [
+          "alternatives",
+          "affectedPaths",
+          "sideEffects",
+          "reversibility"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "depth": {
+            "const": "L3"
+          }
+        },
+        "required": ["depth"]
+      },
+      "then": {
+        "required": ["rollback", "riskImpact", "independentReview"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "approved"
+          }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "approval": {
+            "$ref": "#/$defs/approval"
+          },
+          "materialOpenItems": {
+            "maxItems": 0
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "approval": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "stalledRounds": {
+            "minimum": 2
+          }
+        },
+        "required": ["stalledRounds"]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "needs-user-direction"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "needs-user-direction"
+          }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "stalledRounds": {
+            "minimum": 2
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      }
+    },
+    "identifier": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "statementItem": {
+      "type": "object",
+      "required": ["id", "statement"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "statement": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "statementArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/statementItem"
+      }
+    },
+    "verificationScenario": {
+      "type": "object",
+      "required": [
+        "id",
+        "acceptanceCriteriaRefs",
+        "actor",
+        "surface",
+        "preconditions",
+        "steps",
+        "expected",
+        "evidence"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "acceptanceCriteriaRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        },
+        "actor": {
+          "enum": ["user", "developer", "automated-test", "reviewer"]
+        },
+        "surface": {
+          "enum": [
+            "ui",
+            "api",
+            "cli",
+            "database",
+            "repository",
+            "filesystem",
+            "log",
+            "document",
+            "manual-review",
+            "other"
+          ]
+        },
+        "preconditions": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "steps": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "expected": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "evidence": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": ["decisionMaker", "boundaries"],
+      "properties": {
+        "decisionMaker": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "boundaries": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "required": [
+        "id",
+        "statement",
+        "materiality",
+        "effect",
+        "revisability"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "statement": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "materiality": {
+          "enum": ["minor", "material", "critical"]
+        },
+        "effect": {
+          "enum": ["advisory", "default", "guardrail", "gate"]
+        },
+        "revisability": {
+          "enum": ["easy", "moderate", "hard"]
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "required": ["approvedBy", "approvedAt", "frameDigest"],
+      "properties": {
+        "approvedBy": {
+          "const": "user"
+        },
+        "approvedAt": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "frameDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 of the prospective approved content with approval removed and status normalized to approved."
+        }
+      }
+    },
+    "alternative": {
+      "type": "object",
+      "required": ["id", "option", "reason"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "option": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "reason": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "reversibility": {
+      "type": "object",
+      "required": ["level", "cost"],
+      "properties": {
+        "level": {
+          "enum": ["easy", "moderate", "hard"]
+        },
+        "cost": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "required": ["strategy", "triggers", "recoveryEvidence"],
+      "properties": {
+        "strategy": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "triggers": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "recoveryEvidence": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        }
+      }
+    },
+    "riskImpact": {
+      "type": "object",
+      "required": ["security", "data", "cost", "deployment"],
+      "properties": {
+        "security": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "data": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "cost": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "deployment": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "independentReview": {
+      "type": "object",
+      "required": ["required", "rationale"],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "rationale": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    }
+  }
+}

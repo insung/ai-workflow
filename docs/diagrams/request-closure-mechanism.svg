@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="closure-title closure-desc">
+  <title id="closure-title">요청 닫기 스킬의 상태 수명주기</title>
+  <desc id="closure-desc">원 요청을 수집하고, 사실과 추론을 분리하고, 중요한 불확실성만 질문한 뒤, 사용자가 이해 확인을 한다. 기계적 게이트를 통과하면 사용자 승인으로 닫히며, 오해 또는 게이트 실패가 있으면 질문 단계로 반복한다.</desc>
+  <defs>
+    <style>
+      :root { --mono: "SFMono-Regular", "Menlo", "Noto Sans Mono CJK KR", monospace; }
+      text { font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#4f5d75"/>
+    </marker>
+    <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#eb6c36"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="720" fill="#f5f5f5"/>
+
+  <!-- Semantic bands -->
+  <rect x="40" y="80" width="1200" height="288" rx="12" fill="rgba(79,93,117,0.045)" stroke="rgba(45,49,66,0.16)"/>
+  <rect x="40" y="392" width="1200" height="142" rx="12" fill="rgba(235,108,54,0.045)" stroke="rgba(235,108,54,0.34)" stroke-dasharray="7 6"/>
+  <rect x="40" y="558" width="1200" height="122" rx="12" fill="rgba(45,49,66,0.035)" stroke="rgba(45,49,66,0.16)"/>
+
+  <text x="60" y="107" fill="#4f5d75" font-size="11" font-family="var(--mono)" font-weight="700" letter-spacing="1.7">PRIMARY · REQUEST FRAME FORMATION</text>
+  <text x="60" y="419" fill="#eb6c36" font-size="11" font-family="var(--mono)" font-weight="700" letter-spacing="1.7">REOPEN · MISUNDERSTANDING OR FAILED GATE</text>
+  <text x="60" y="585" fill="#4f5d75" font-size="11" font-family="var(--mono)" font-weight="700" letter-spacing="1.7">TERMINAL · HUMAN AUTHORITY</text>
+
+  <!-- Scope boundaries -->
+  <path d="M70 136 H930 V340 H70 Z" fill="none" stroke="rgba(79,93,117,0.38)" stroke-dasharray="4 5"/>
+  <rect x="84" y="125" width="212" height="24" rx="4" fill="#f5f5f5"/>
+  <text x="94" y="142" fill="#4f5d75" font-size="10" font-family="var(--mono)" font-weight="700">ADAPTIVE · SKILL + USER</text>
+  <path d="M946 136 H1198 V340 H946 Z" fill="none" stroke="rgba(235,108,54,0.58)" stroke-dasharray="4 5"/>
+  <rect x="960" y="125" width="216" height="24" rx="4" fill="#f5f5f5"/>
+  <text x="970" y="142" fill="#eb6c36" font-size="10" font-family="var(--mono)" font-weight="700">DETERMINISTIC · SCRIPT</text>
+
+  <!-- Nine labeled transitions, drawn before states. -->
+  <line x1="62" y1="246" x2="82" y2="246" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="266" y1="246" x2="302" y2="246" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="486" y1="246" x2="522" y2="246" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="706" y1="246" x2="738" y2="246" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="922" y1="246" x2="958" y2="246" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <path d="M830 288 V422" fill="none" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <path d="M958 272 H938 V464 H920" fill="none" stroke="#eb6c36" stroke-width="1.5" marker-end="url(#arrow-accent)"/>
+  <path d="M740 464 H614 V288" fill="none" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <path d="M1050 288 V590" fill="none" stroke="#eb6c36" stroke-width="1.6" marker-end="url(#arrow-accent)"/>
+
+  <!-- Opaque masks keep labels clear of connector strokes. -->
+  <g text-anchor="middle" font-size="8" font-family="var(--mono)" font-weight="700" letter-spacing="0.45">
+    <rect x="56" y="229" width="24" height="16" rx="3" fill="#f5f5f5"/><text x="68" y="241" fill="#4f5d75">RAW</text>
+    <rect x="268" y="229" width="32" height="16" rx="3" fill="#f5f5f5"/><text x="284" y="241" fill="#4f5d75">PARSE</text>
+    <rect x="491" y="229" width="26" height="16" rx="3" fill="#f5f5f5"/><text x="504" y="241" fill="#4f5d75">ASK</text>
+    <rect x="707" y="229" width="30" height="16" rx="3" fill="#f5f5f5"/><text x="722" y="241" fill="#4f5d75">REPLY</text>
+    <rect x="921" y="229" width="38" height="16" rx="3" fill="#f5f5f5"/><text x="940" y="241" fill="#4f5d75">MATCH</text>
+    <rect x="782" y="348" width="96" height="18" rx="3" fill="#f5f5f5"/><text x="830" y="361" fill="#4f5d75">MISUNDERSTANDING</text>
+    <rect x="927" y="350" width="70" height="18" rx="3" fill="#f5f5f5"/><text x="962" y="363" fill="#eb6c36">GATE FAIL</text>
+    <rect x="650" y="448" width="78" height="18" rx="3" fill="#f5f5f5"/><text x="689" y="461" fill="#4f5d75">NEXT QUESTION</text>
+    <rect x="1014" y="542" width="72" height="18" rx="3" fill="#f5f5f5"/><text x="1050" y="555" fill="#eb6c36">GATE PASS</text>
+  </g>
+
+  <circle cx="56" cy="246" r="6" fill="#2d3142"/>
+
+  <!-- Primary phase rail: five states. -->
+  <g text-anchor="middle">
+    <g>
+      <rect x="82" y="204" width="184" height="84" rx="8" fill="#ffffff" stroke="#2d3142"/>
+      <text x="174" y="237" fill="#2d3142" font-size="15" font-weight="700">요청 수집</text>
+      <text x="174" y="260" fill="#4f5d75" font-size="10" font-family="var(--mono)">raw-request.md</text>
+      <text x="174" y="276" fill="#4f5d75" font-size="10">원문을 해석 전에 보존</text>
+    </g>
+    <g>
+      <rect x="302" y="204" width="184" height="84" rx="8" fill="#ffffff" stroke="#2d3142"/>
+      <text x="394" y="237" fill="#2d3142" font-size="15" font-weight="700">맥락 분리</text>
+      <text x="394" y="260" fill="#4f5d75" font-size="10">사실 · 추론 · 가정 · 미결정</text>
+      <text x="394" y="276" fill="#4f5d75" font-size="10" font-family="var(--mono)">observed ≠ inferred</text>
+    </g>
+    <g>
+      <rect x="522" y="204" width="184" height="84" rx="8" fill="#ffffff" stroke="#2d3142"/>
+      <text x="614" y="237" fill="#2d3142" font-size="15" font-weight="700">중요도별 질문</text>
+      <text x="614" y="260" fill="#4f5d75" font-size="10">한 번에 하나의 결정 경계</text>
+      <text x="614" y="276" fill="#4f5d75" font-size="10" font-family="var(--mono)">material frontier</text>
+    </g>
+    <g>
+      <rect x="738" y="204" width="184" height="84" rx="8" fill="#ffffff" stroke="#2d3142"/>
+      <text x="830" y="237" fill="#2d3142" font-size="15" font-weight="700">이해 확인</text>
+      <text x="830" y="260" fill="#4f5d75" font-size="10">시각화 + 쉬운 말로 읽어주기</text>
+      <text x="830" y="276" fill="#4f5d75" font-size="10" font-family="var(--mono)">user corrects meaning</text>
+    </g>
+    <g>
+      <rect x="958" y="204" width="184" height="84" rx="8" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1.6"/>
+      <text x="1050" y="237" fill="#2d3142" font-size="15" font-weight="700">기계적 게이트</text>
+      <text x="1050" y="260" fill="#4f5d75" font-size="10">구조 · 충돌 · 열린 중요 항목</text>
+      <text x="1050" y="276" fill="#eb6c36" font-size="10" font-family="var(--mono)">materialOpenItems = 0</text>
+    </g>
+  </g>
+
+  <!-- Recovery state and v1 depth policy. -->
+  <g text-anchor="middle">
+    <rect x="740" y="422" width="180" height="84" rx="8" fill="#f5f5f5" stroke="#eb6c36" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <rect x="752" y="434" width="58" height="16" rx="3" fill="none" stroke="rgba(235,108,54,0.6)"/>
+    <text x="781" y="446" fill="#eb6c36" font-size="9" font-family="var(--mono)" font-weight="700">REOPEN</text>
+    <text x="830" y="473" fill="#2d3142" font-size="15" font-weight="700">Frame 재개방</text>
+    <text x="830" y="491" fill="#4f5d75" font-size="10">다음 중요 질문으로 복귀</text>
+  </g>
+
+  <g>
+    <text x="84" y="449" fill="#2d3142" font-size="11" font-family="var(--mono)" font-weight="700">V1 DEPTH POLICY · 사용자가 언제든 재분류 가능</text>
+    <text x="84" y="477" fill="#4f5d75" font-size="11"><tspan font-weight="700" fill="#2d3142">L1</tspan><tspan dx="10">낮은 위험·쉽게 되돌림 → 목표, 범위, 결과, 수용 기준</tspan></text>
+    <text x="84" y="498" fill="#4f5d75" font-size="11"><tspan font-weight="700" fill="#2d3142">L2</tspan><tspan dx="10">중요한 영향 → 제약, 대안, 영향 경로, 부작용 추가</tspan></text>
+    <text x="84" y="519" fill="#4f5d75" font-size="11"><tspan font-weight="700" fill="#2d3142">L3</tspan><tspan dx="10">되돌리기 어려움·보안·데이터·비용 → 권한, 롤백, 독립 검토 추가</tspan></text>
+  </g>
+
+  <!-- Terminal outcome. -->
+  <g text-anchor="middle">
+    <rect x="950" y="590" width="200" height="70" rx="10" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1.7"/>
+    <circle cx="978" cy="615" r="8" fill="none" stroke="#eb6c36" stroke-width="1.4"/>
+    <circle cx="978" cy="615" r="4.5" fill="#eb6c36"/>
+    <text x="1050" y="620" fill="#2d3142" font-size="16" font-weight="750">사용자 승인</text>
+    <text x="1050" y="644" fill="#eb6c36" font-size="10" font-family="var(--mono)" font-weight="700">APPROVED REQUEST FRAME</text>
+  </g>
+
+  <!-- Legend strip -->
+  <g transform="translate(64 698)" font-family="var(--mono)" font-size="9" fill="#4f5d75">
+    <rect x="0" y="-8" width="18" height="10" rx="2" fill="#ffffff" stroke="#2d3142"/><text x="26" y="0">의미 판단: Skill + 사용자</text>
+    <rect x="220" y="-8" width="18" height="10" rx="2" fill="rgba(235,108,54,0.08)" stroke="#eb6c36"/><text x="246" y="0">형식 검증: Script</text>
+    <rect x="424" y="-8" width="18" height="10" rx="2" fill="#f5f5f5" stroke="#eb6c36" stroke-dasharray="4 3"/><text x="450" y="0">재개방: 닫힐 때까지 반복</text>
+    <text x="1160" y="0" text-anchor="end">v1 · APPROVED DESIGN</text>
+  </g>
+</svg>
