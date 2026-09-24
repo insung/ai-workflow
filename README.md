@@ -38,11 +38,18 @@ graph LR
 *   **`doc-index`**: frontmatter 기반의 문서 카테고리화 및 단일 테이블 인덱스 관리
 *   **`doc-audit`**: AI 에이전트용 지시 문서를 기계적 로직으로 교정 및 관제
 *   **`readme-craft`**: 프로젝트 유형에 최적화된 고품질 README.md 생성 및 유지
-*   **`request-closure`**: 열린 요청을 구현 전에 사용자 승인·검증 가능한 Request Frame으로 수렴
+
+이전에 이 저장소에 있던 범용 스킬은 각각 독립 저장소에서 관리한다.
+
+| 스킬 | 용도 | 정본 |
+| --- | --- | --- |
+| `git-workflow` | 변경 범위, 브랜치, PR, 릴리즈 노트 | [insung/git-workflow](https://github.com/insung/git-workflow) |
+| `request-closure` | 열린 요청을 승인 가능한 Request Frame으로 수렴 | [insung/request-closure](https://github.com/insung/request-closure) |
+| `progress-report` | 근거가 있는 작업 진행 보고 | [insung/progress-report](https://github.com/insung/progress-report) |
 
 ### 요청 닫기 실험
 
-열린 요청을 곧바로 실행하지 않고 사용자가 승인한 Request Frame으로 수렴시키는 첫 실험은 [요청 닫기 사용법과 설계](docs/REQUEST_CLOSURE.md)에서 추적한다. v1은 기존 `track-agent`와 분리된 명시 호출 전용 `request-closure` 스킬이며, Worker·Verifier·ACP·자동 훅은 포함하지 않는다.
+열린 요청을 곧바로 실행하지 않고 사용자가 승인한 Request Frame으로 수렴시키는 첫 실험은 [요청 닫기 사용법과 설계](docs/REQUEST_CLOSURE.md)에서 추적한다. 현재 스킬 파일과 설치 방법은 독립된 `request-closure` 저장소에 있다. v1은 기존 `track-agent`와 분리되어 있으며 Worker·Verifier·ACP·자동 훅은 포함하지 않는다.
 
 ## 📂 디렉토리 구조
 
@@ -55,8 +62,7 @@ graph LR
 docs/
 ├── REQUEST_CLOSURE.md  # request-closure 사용법과 설계
 └── TRACK_AGENT_GUIDE.md # 신규 track-agent 상세 운영 가이드
-skills/
-└── request-closure/    # 요청 닫기 스킬, 계약, 예제와 validator
+skills/                 # 이 저장소에 남아 있는 프로젝트별 스킬
 ```
 
 ## 🚀 빠른 시작 (Quick Start)

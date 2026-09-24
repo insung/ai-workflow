@@ -1,6 +1,0 @@
-interface:
-  display_name: "Request Closure"
-  short_description: "열린 요청을 검증 가능한 승인 Frame으로 닫기"
-  default_prompt: "$request-closure로 이 요청의 암묵지와 중요 미결정을 드러내고, 구현 전에 검증 가능한 Request Frame으로 닫아줘."
-policy:
-  allow_implicit_invocation: false

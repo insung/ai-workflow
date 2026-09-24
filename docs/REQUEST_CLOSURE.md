@@ -1,6 +1,6 @@
 # 요청 닫기
 
-`request-closure`는 열린 사용자 요청을 곧바로 실행하지 않고, 사용자가 이해하고 승인한 Request Frame으로 수렴시키는 스킬이다. 첫 버전은 구현·문서 작성·검증 에이전트를 호출하지 않는다. 대상 프로젝트의 기존 파일도 변경하지 않으며, 요청 닫기 산출물만 `.agent-workflow/requests/<request-id>/` 아래에 기록한다.
+`request-closure`는 열린 사용자 요청을 곧바로 실행하지 않고, 사용자가 이해하고 승인한 Request Frame으로 수렴시키는 스킬이다. 이 문서는 첫 설계의 작동 방식과 경계를 설명한다. [현재 스킬과 설치 안내](https://github.com/insung/request-closure)는 독립 저장소에서 관리한다. 첫 버전은 구현·문서 작성·검증 에이전트를 호출하지 않는다. 대상 프로젝트의 기존 파일도 변경하지 않으며, 요청 닫기 산출물만 `.agent-workflow/requests/<request-id>/` 아래에 기록한다.
 
 ![요청 닫기 스킬의 상태 수명주기](diagrams/request-closure-mechanism.svg)
 
@@ -8,14 +8,16 @@
 
 ## 설치와 호출
 
-저장소의 정본은 [`skills/request-closure/`](../skills/request-closure/)이다. 사용자 전역에서 쓸 때는 이 디렉터리를 복사하기보다 다음 위치에서 정본을 가리키는 심볼릭 링크를 사용한다.
+스킬의 정본은 독립 저장소의 `skills/request-closure/`이다. 다음 명령으로 각 도구의 플러그인을 설치할 수 있다.
 
-| 환경 | 사용자 전역 경로 | 호출 |
-| --- | --- | --- |
-| Codex | `$HOME/.agents/skills/request-closure` | `$request-closure` |
-| Claude Code | `$HOME/.claude/skills/request-closure` | `/request-closure` |
+```bash
+codex plugin marketplace add insung/request-closure
+codex plugin add request-closure@request-closure
+claude plugin marketplace add insung/request-closure
+claude plugin install request-closure@request-closure
+```
 
-Codex는 `agents/openai.yaml`의 `allow_implicit_invocation: false`로 자동 호출을 막는다. Claude Code에서도 명시 호출 전용으로 유지하려면 사용자 설정의 `skillOverrides.request-closure`를 `user-invocable-only`로 둔다.
+Codex에서는 `$request-closure`, Claude Code 플러그인에서는 `/request-closure:request-closure`로 호출한다. Codex의 스킬 메타데이터는 자동 호출을 막는다. Claude Code에서도 명시 호출 전용으로 유지하려면 `/skills` 메뉴에서 이 플러그인 스킬을 `user-invocable-only`로 설정한다.
 
 대상 프로젝트 루트에서 호출하거나 프롬프트에 대상 경로를 명시한다.
 
@@ -25,7 +27,7 @@ $request-closure
 아직 구현하지 말고 중요한 미결정을 하나씩 확인하여 검증 가능한 Request Frame으로 닫아줘.
 ```
 
-Claude Code에서는 첫 줄을 `/request-closure`로 바꾼다. 새 설치가 목록에 나타나지 않으면 해당 도구를 다시 시작한다.
+Claude Code에서는 첫 줄을 `/request-closure:request-closure`로 바꾼다. 새 설치가 목록에 나타나지 않으면 해당 도구에서 새 세션을 시작한다.
 
 예를 들어 요청 ID가 `REQ-20260921-RETRY-POLICY`이면 산출물은 대상 프로젝트 안에 다음과 같이 생긴다.
 
